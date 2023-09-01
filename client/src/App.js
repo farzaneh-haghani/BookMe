@@ -19,14 +19,14 @@ const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [providers, setProviders] = useState([]);
 	const [isProvider, setIsProvider] = useState(false);
-	const [isProvidersLoading, setIsProvidersLoading] = useState(false);
+	const [isProvidersLoaded, setIsProvidersLoaded] = useState(false);
 
 	useEffect(() => {
 		const fetchProvider = async () => {
 			try {
 				const response = await axios.get("/api/providers");
 				setProviders(response.data);
-				setIsProvidersLoading(true);
+				setIsProvidersLoaded(true);
 			} catch (error) {
 				console.error(error);
 			}
@@ -58,8 +58,8 @@ const App = () => {
 		setProviders,
 		isProvider,
 		setIsProvider,
-		isProvidersLoading,
-		setIsProvidersLoading,
+		isProvidersLoaded,
+		setIsProvidersLoaded,
 	};
 
 	return (

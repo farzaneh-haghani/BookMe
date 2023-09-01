@@ -48,6 +48,7 @@ router.post("/validation", async (req, res) => {
 		}
 		res.status(200).json({ message: "success!" });
 	} catch (error) {
+		logger.error("Error: ", error.message);
 		res.status(500).json({ message: "Invalid token!" });
 	}
 });
@@ -80,6 +81,7 @@ router.delete("/profile", async (req, res) => {
 			}
 		}
 	} catch (error) {
+		logger.error("Error: ", error.message);
 		res.status(500).json({ error });
 	}
 });
@@ -135,8 +137,7 @@ router.post("/provider", async (req, res) => {
 
 		res.status(201).json(result);
 	} catch (error) {
-		/* eslint-disable-next-line */
-		console.log(error);
+		logger.error("Error: ", error.message);
 		res.status(500).json({ error: error });
 	}
 });
@@ -144,12 +145,9 @@ router.post("/provider", async (req, res) => {
 router.get("/providers", async (_, res) => {
 	try {
 		const providers = await Provider.findAll({ include: Calendar });
-		if (providers.length === 0) {
-			res.status(400).json({ error: "No Provider Found!" });
-		} else {
-			res.status(200).json(providers);
-		}
+		res.status(200).json(providers);
 	} catch (error) {
+		logger.error("Error: ", error.message);
 		res.status(500).json(error);
 	}
 });
@@ -195,6 +193,7 @@ router.put("/provider", async (req, res) => {
 			res.status(404).json({ message: "Provider not found" });
 		}
 	} catch (error) {
+		logger.error("Error: ", error.message);
 		res.status(500).json({ error });
 	}
 });
@@ -220,6 +219,7 @@ router.post("/calendar", async (req, res) => {
 		});
 		res.status(200).json({ message: "success", calendar });
 	} catch (error) {
+		logger.error("Error: ", error.message);
 		res.status(500).json({ error });
 	}
 });

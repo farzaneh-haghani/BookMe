@@ -20,23 +20,23 @@ const Header = () => {
 		isProvider,
 		setIsProvider,
 		providers,
-		isProvidersLoading,
+		isProvidersLoaded,
 	} = useContext(AppContext);
 	const { handleSignUp } = useAuth();
 
 	useEffect(() => {
-		if (isLoggedIn && isProvidersLoading) {
+		if (isLoggedIn && isProvidersLoaded) {
 			if (providers.some((provider) => provider?.email === user?.email)) {
 				setIsProvider(true);
 			} else {
 				setIsProvider(false);
 			}
 		}
-	}, [user, isLoggedIn, setIsProvider, isProvidersLoading, providers]);
+	}, [user, isLoggedIn, setIsProvider, isProvidersLoaded, providers]);
 
 	return (
 		<AppBar sx={{ background: "white", color: "black", position: "static" }}>
-			{!isProvidersLoading ? (
+			{!isProvidersLoaded ? (
 				<LinearProgress />
 			) : (
 				<Box
